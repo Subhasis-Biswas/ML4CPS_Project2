@@ -2,3 +2,27 @@ data/
 *.xlsx
 earth_data/
 country_high_res/
+# Ignore auxiliary and intermediate LaTeX files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+
+# Ignore backup files created by some text editors
+*.bak
+*.bbl
+*.blg
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.swo
+
+# Ignore generated PDF files if you don't want them in the repository
+# Uncomment the next line if you want to exclude PDF files from version control
+*.pdf
+
+# Ignore LaTeX build directory if present
+build/
