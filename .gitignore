@@ -9,6 +9,10 @@ country_high_res/
 *.log
 *.out
 *.synctex.gz
+*.toc
+*.bcf
+*.run.xml
+*.blg
 
 # Ignore backup files created by some text editors
 *.bak
