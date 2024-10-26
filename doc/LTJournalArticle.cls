@@ -47,13 +47,13 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage[
-	top=2.5cm, % Top margin
-	bottom=2.5cm, % Bottom margin
-	left=2cm, % Left margin
-	right=2cm, % Right margin
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	left=1cm, % Left margin
+	right=1cm, % Right margin
 	footskip=1cm, % Space from the bottom margin to the baseline of the footer
-	headsep=0.75cm, % Space from the top margin to the baseline of the header
-	columnsep=20pt, % Space between text columns (in twocolumn mode)
+	headsep=0.25cm, % Space from the top margin to the baseline of the header
+	columnsep=15pt, % Space between text columns (in twocolumn mode)
 	%showframe % Uncomment to show frames around the margins for debugging purposes
 ]{geometry}
 

@@ -29,9 +29,6 @@
 
 \addbibresource{ref.bib} % BibLaTeX bibliography file
 
-\runninghead{Low Earth Satellite Orbit Determination: Progress Report} % A shortened article title to appear in the running head, leave this command empty for no running head
-
-\footertext{\textit{Scientific Computing Lab} (August, 2024)} % Text to appear in the footer, leave this command empty for no footer text
 
 \setcounter{page}{1} % The page number of the first page, set this to a higher number if the article is to be part of an issue or larger work
 
@@ -133,8 +130,6 @@ x = r \cdot \sin\left(\frac{\pi}{180} \cdot \theta\right)
 y = r \cdot \cos\left(\frac{\pi}{180} \cdot \theta\right)
 \] [$y$ axis aligns with $0^\circ$, so $\sin$ and $\cos$ are swapped]. The goal is to check for physical proximity of the suburbs, using the $L^2$ norm.
 
-<Figure Placeholder, Plain Scatterplot> <Figure Placeholder, Geo-accurate> <Figure Placeholder Joint Density>
-
 \textbf{M2}: Each feature under the $Services$ catgory is considered and min-max scaled. Before Scaling StDev <Figure> and After Scaling StDev <Figure>. Afterwards, mean was taken across the scaled feature-values under the Services category per row (suburb by suburb), which is named as the $Services \ Score$ for that suburb. The distribution of is as such <Figure>. Similarity between suburbs from this perspective is defined as the absolute difference between the corresponding services' score. This is the pairwise similarity heatmap <Figure>. The aim is to quantify how well-equipped a suburb is in terms of the said facilities and to check for similar amount of services provided in other suburbs. However, some feature values like \textit{Aged Care (Low Care)} dominate over the others. Thus, scaling is required. 
 
 \textbf{M3}: The \textit{2012 population} category was chosen and only the feature names with $\%$ were chosen, for example
@@ -145,13 +140,33 @@ $\{ \textit{2012 ERP age 0-4\%}, \textit{2012 ERP age 5-9\%}, \dots\}$. The feat
 
 \subsection{A.2}
 
+We are using the following module for computing the multidimensional scaling onto 2D.
+\begin{verbatim}
+    from sklearn.manifold import MDS
+\end{verbatim}
 
-<MDS Geographic; Stress; 2D corr MDS; Stress MDS>
+We'll be using \href{https://en.wikipedia.org/wiki/Procrustes_analysis}{Procrustes Disparity} for measuring the alignment between two similarity/distance metrics, the comparisons might be of the sort: \textit{Metric in original space vs Metric in 2D} or \textit{Metric A vs Metric B} etc. The closer the value of the disparity is to 0 the better. For MDS, we'll also note the \href{https://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/mds/stress#:~:text=The%20measure%20of%20goodness%20of,or%20more%20estimated%20stimuli%20dimensions}{stress of the MDS} and the correlation between the original pairwise distances and distances in the 2D projected space. 
 
-<MDS Services; 2D corr MDS; Stress MDS>
+\subsubsection{M1}
 
+The suburb locations are already on the 2D map, thus we do not require MDS. 
+
+<Figure Placeholder, Plain Scatterplot> <Figure Placeholder, Geo-accurate> <Figure Placeholder Joint Density>
+
+\subsubsection{M2}
+
+2D projected profile: <Figure>
+
+$\textit{MDS Stress}=  0.010498$
+
+
+
+
+
+\subsubsection{M3}
 <MDS Pop Distribution; 2D corr MDS; Stress MDS>
 
+\subsubsection{Findings}
 <Similar for population; Expected; Procrus> 
 
 <Diff for service; unexpected; procus>
