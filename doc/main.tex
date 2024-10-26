@@ -112,7 +112,7 @@
 In this section we refer to the defined metrics as $M1$, $M2$ and $M3$.
 \begin{itemize}
     \item \textbf{M1}: Geographic Proximity
-    \item \textbf{M2}: Service Availability 
+    \item \textbf{M2}: Service Availability
     \item \textbf{M3}: Population Age Distribution
 \end{itemize}
 
@@ -121,7 +121,62 @@ In this section we refer to the defined metrics as $M1$, $M2$ and $M3$.
 
 Here we'll be going through how the similarity metrics were defined and the related information.
 
-\textbf{M1}: 
+\textbf{M1}: Used $Location$ feature from the excel sheets to approximate the location relative to the \textit{Melbourne General Post Office (GPO)}. The feature-value was parsed as: \newline
+\textit{Xkm Y of Melbourne} $\rightarrow (X, Y) \rightarrow (X, compass\ bearing)$, with $Y \in \{\text{N}, \text{NNE}, \text{NE}, \text{ENE}, \dots,\text{NNW}\}$ and the corresponding bearings being in $\{0, 22.5, 45, 67.5,\dots, 337.5\}$.
+
+Now, max distance of any suburb from our origin $O$ (Melbourne GPO) is 68km. So, maximum pairwise distance that can be is $2\times 68=136$ km. The curvature of the Earth causes a drop of around $1.45km$ [\href{https://earthcurvature.com/}{Calculator}] across this distance. As this is quite small, it's ignored and the entire region is treated as flat. We then convert $Polar$ to $Cartesian$ using the formula 
+
+\[
+x = r \cdot \sin\left(\frac{\pi}{180} \cdot \theta\right)
+\]
+\[
+y = r \cdot \cos\left(\frac{\pi}{180} \cdot \theta\right)
+\] [$y$ axis aligns with $0^\circ$, so $\sin$ and $\cos$ are swapped]. The goal is to check for physical proximity of the suburbs, using the $L^2$ norm.
+
+<Figure Placeholder, Plain Scatterplot> <Figure Placeholder, Geo-accurate> <Figure Placeholder Joint Density>
+
+\textbf{M2}: Each feature under the $Services$ catgory is considered and min-max scaled. Before Scaling StDev <Figure> and After Scaling StDev <Figure>. Afterwards, mean was taken across the scaled feature-values under the Services category per row (suburb by suburb), which is named as the $Services \ Score$ for that suburb. The distribution of is as such <Figure>. Similarity between suburbs from this perspective is defined as the absolute difference between the corresponding services' score. This is the pairwise similarity heatmap <Figure>. The aim is to quantify how well-equipped a suburb is in terms of the said facilities and to check for similar amount of services provided in other suburbs. However, some feature values like \textit{Aged Care (Low Care)} dominate over the others. Thus, scaling is required. 
+
+\textbf{M3}: The \textit{2012 population} category was chosen and only the feature names with $\%$ were chosen, for example
+
+$\{ \textit{2012 ERP age 0-4\%}, \textit{2012 ERP age 5-9\%}, \dots\}$. The feature values are then converted to probability distributions with range $[0,1]$, with each row summing up to 1 for each suburb (verified). For quantifying similarity between two locations we consider the \href{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}{Jensen Shannon Divergence}(JSD) between the two population distributions. This distance metric was chosen as we're essentially dealing with pmf's and because JSD is symmetric. The aim of this metric/perspective is to measure the similarity between the 2012 (latest) population distributions between two locations.
+
+
+
+\subsection{A.2}
+
+
+<MDS Geographic; Stress; 2D corr MDS; Stress MDS>
+
+<MDS Services; 2D corr MDS; Stress MDS>
+
+<MDS Pop Distribution; 2D corr MDS; Stress MDS>
+
+<Similar for population; Expected; Procrus> 
+
+<Diff for service; unexpected; procus>
+
+<spectral cluster using distance matrix; then find common stuff; declare that geographic sim is referred in A3>
+
+
+\subsection{A.3}
+
+
+<Morans for M2; Weight fraction analysis; Plots>
+<M2: Weight less + procrus + not good>
+
+
+<Morans for M3; Weight fraction analysis; Plots>
+<M3: Weight More + procrus + good>
+
+
+
+---- 
+
+Explain why 
+
+
+
 
 
 
