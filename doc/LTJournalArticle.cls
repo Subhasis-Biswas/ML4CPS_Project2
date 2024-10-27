@@ -47,13 +47,13 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage[
-	top=1.5cm, % Top margin
-	bottom=1.5cm, % Bottom margin
+	top=0.5cm, % Top margin
+	bottom=1cm, % Bottom margin
 	left=1cm, % Left margin
 	right=1cm, % Right margin
-	footskip=1cm, % Space from the bottom margin to the baseline of the footer
+	footskip=0.25cm, % Space from the bottom margin to the baseline of the footer
 	headsep=0.25cm, % Space from the top margin to the baseline of the header
-	columnsep=15pt, % Space between text columns (in twocolumn mode)
+	columnsep=13pt, % Space between text columns (in twocolumn mode)
 	%showframe % Uncomment to show frames around the margins for debugging purposes
 ]{geometry}
 
@@ -66,7 +66,7 @@
 
 \usepackage[sc]{mathpazo} % Use the Palatino font
 
-\linespread{1.05} % Increase line spacing slightly
+\linespread{1.0} % Increase line spacing slightly
 
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 
@@ -132,7 +132,7 @@
 	{} % Code before the section title
 	[] % Code after the section title
 
-\titlespacing*{\subsubsection}{0pt}{0.5\baselineskip}{8pt} % Spacing around section titles, the order is: left, before and after
+\titlespacing*{\subsubsection}{0pt}{0.1\baselineskip}{3pt} % Spacing around section titles, the order is: left, before and after
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION CUSTOMIZATION
