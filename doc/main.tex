@@ -255,6 +255,50 @@ The data partially supports the hypothesis, and depends on the perspective and t
 \section{Part B}
 
 
+\subsection{Hospital Analysis Outline}
+
+<Public hospital separation plot>
+
+We collected the actual locations of the hospitals from Google Maps and plotted them, in order to get an idea of their positions. <Figure>
+
+We do a distribution plot for 'Distance to nearest public hospital (km)'. <Figure>
+
+This are the plots depicting the which hospitals (with and without emergency) serve how much of the nearest population. <Fig1> <Fig2>
+
+These are the tables for the same <Tab1> <Tab2>
+
+We bin the distances according to Freedman-Diaconis rule. The formula:
+
+$\text{Bin Width} = 2 \times \frac{\text{IQR}}{\sqrt[3]{n}}$
+
+
+
+
+We check if the hospital separations of each of the suburbs are linearly related to the respective total populations of 2012. The initial guess is that they should be. <Figure>
+
+Correlation (Pearson): 0.9130
+
+$R^2$ for Linear Regression: 0.8336
+
+As can be seen, a lot of the separations can be explained by a linear relationship between the two variables.
+
+Now, let us check if population density has anything to do with the distance to the nearest hospital. The initial guess is that due to the lesser availability of essential services, with increasing distance, the density should also decay. We log-transform the travel-time. <Figure>
+
+We can observe a linear decay in population density wrt $\log(distance \ to \ nearest \ public \ hospital)$. We try a least-square fit of a linear model. 
+
+Correlation (Pearson): -0.7364
+
+$R^2: 0.5422$
+
+Next up, we can ask, whether non-essential (Category 4 and 5) emergency visits decrease with distances to the hospitals with emergency services.
+
+The boxplot <Figure> indeed shows a decreasing trend as the distances grow. The intervals are considered according to the said rule.
+
+
+Another aspect is that the injuries can be spatially clustered by LISA. Disregarding the significance, we can plot the means of the distance to GPO for each cluster vs means of \% of injuries as emergency. We can clearly see an increasing trend as the distance from the Melbourne GPO increases, i.e. outskirts have more fraction of emergency as injuries.
+
+\subsection{Population Increase/Decrease trend with distance}
+
 
 
 
