@@ -153,11 +153,11 @@ Now, max distance of any suburb from our origin $O$ (Melbourne GPO) is 68km. So,
 
 $(x, y) = \big(r\sin\left(\frac{\pi\theta}{180}\right), r\cos\left(\frac{\pi\theta}{180}\right)\big)$ [$y$ axis aligns with $0^\circ$, so $\sin$ and $\cos$ are swapped]. The goal is to check for physical proximity of the suburbs, using the $L^2$ norm.
 
-\textbf{M2}: Each feature under the $Services$ catgory is considered and min-max scaled. Before Scaling StDev <Figure> and After Scaling StDev <Figure>. Afterwards, mean was taken across the scaled feature-values under the Services category per row (suburb by suburb), which is named as the $Services \ Score$ for that suburb. The distribution of is as such <Figure>. Similarity between suburbs from this perspective is defined as the absolute difference between the corresponding services' score. This is the pairwise similarity heatmap <Figure>. The aim is to quantify how well-equipped a suburb is in terms of the said facilities and to check for similar amount of services provided in other suburbs. However, some feature values like \textit{Aged Care (Low Care)} dominate over the others. Thus, scaling is required. 
+\textbf{M2}: Each feature under the $Services$ catgory is considered and min-max scaled <Figure>. Afterwards, mean was taken across the scaled feature-values under the Services category suburb by suburb, which is named as the $Services \ Score$ for that suburb. The distribution of is as such <Figure>. Similarity between suburbs from this perspective is defined as the absolute difference between the corresponding services' score. This is the pairwise similarity heatmap <Figure>. The aim is to quantify how well-equipped a suburb is in terms of the said facilities and to check for similar amount of services provided in other suburbs.
 
 \textbf{M3}: The \textit{2012 population} category was chosen and only the feature names with $\%$ were chosen, for example
 
-$\{ \textit{2012 ERP age 0-4\%}, \textit{2012 ERP age 5-9\%}, \dots\}$. The feature values are then converted to probability distributions with range $[0,1]$, with each row summing up to 1 for each suburb (verified). For quantifying similarity between two locations we consider the \href{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}{Jensen Shannon Divergence}(JSD) between the two population distributions. This distance metric was chosen as we're essentially dealing with pmf's and because JSD is symmetric. The aim of this metric/perspective is to measure the similarity between the 2012 (latest) population distributions between two locations.
+$\{ \textit{2012 ERP age 0-4\%}, \textit{2012 ERP age 5-9\%}, \dots\}$. The feature values are then converted to probability distributions, with each row summing up to 1 for each suburb (verified). For quantifying similarity between two locations we consider the \href{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}{Jensen Shannon Divergence}(JSD) between the two population distributions. This distance metric was chosen as we're essentially dealing with pmf's and because JSD is symmetric. The aim of this metric is to measure the similarity between the 2012 (latest) population distributions between two locations.
 
 
 
@@ -168,11 +168,9 @@ We are using the following module for computing the multidimensional scaling ont
     from sklearn.manifold import MDS
 \end{verbatim}
 
-We'll be using \href{https://en.wikipedia.org/wiki/Procrustes_analysis}{Procrustes Disparity} for measuring the alignment between two similarity/distance metrics, the comparisons might be of the sort: \textit{Metric in original space vs Metric in 2D} or \textit{Metric A vs Metric B} etc. The closer the value of the disparity is to 0 the better. For MDS, we'll also note the \href{https://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/mds/stress#:~:text=The%20measure%20of%20goodness%20of,or%20more%20estimated%20stimuli%20dimensions}{stress of the MDS} and the correlation between the original pairwise distances and distances in the 2D projected space. The values of the MDS quality metrics are written within the plots.
+We'll be using \href{https://en.wikipedia.org/wiki/Procrustes_analysis}{Procrustes Disparity} for measuring the alignment between two distance metrics, the comparisons might be of the sort: \textit{Metric in original space vs Metric in 2D} or \textit{Metric A vs Metric B} etc. The closer the value of the disparity is to 0 the better. For MDS, we'll also note the \href{https://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/mds/stress#:~:text=The%20measure%20of%20goodness%20of,or%20more%20estimated%20stimuli%20dimensions}{stress of the MDS} and the correlation between the original pairwise distances and distances in the 2D projected space. The values of the MDS quality metrics are written within the plots.
 
-\textbf{M1}: The suburb locations are already on the 2D map, thus we do not require MDS. 
-
-<Figure Placeholder, Plain Scatterplot> <Figure Placeholder, Geo-accurate> <Figure Placeholder Joint Density>
+\textbf{M1}: The suburb locations are already on the 2D map, thus we do not require MDS. <Figure Placeholder; Use Scatter and Joint>
 
 \textbf{M2}: 2D projected profile: <Figure>
 
@@ -186,12 +184,9 @@ While doing MDS, for the service score metric, we're essentially dealing with sc
 However, for JSD based population distribution similarity, the high amount of stress indicates poor projection onto the 2D. Although it's not exactly a surprise but still that's quite a high amount. Despite of that, the disparity is still low and correlation is high. 
 
 
-To check which suburbs remain unchanged between these two metrics \textit{M2} and \textit{M3} (we deal with geographic proximity later on) we do a \href{https://en.wikipedia.org/wiki/Spectral_clustering}{spectral clustering} with the exact same similarity matrices arising out of the original computation. Then we use a Gaussian Kernel with $\sigma=1$. We check for the 'elbow' in the (sorted in descending order) eigenvalue plots for both M2 and M3 for the affinity matrices and decide upon the number of clusters required. We settle on $k=3$. 
+To check which suburbs remain unchanged between these two metrics \textit{M2} and \textit{M3} (we deal with geographic proximity later on) we do a \href{https://en.wikipedia.org/wiki/Spectral_clustering}{spectral clustering} with the exact same similarity matrices arising out of the original computation. Then we use a Gaussian Kernel with $\sigma=1$. We check for the 'elbow' in the (sorted in descending order) eigenvalue plots for both M2 and M3 for the affinity matrices and decide upon the number of clusters required. We settle on $k=3$. The agreement between the two clusterings:
 
-We then spectral-cluster the suburbs and the labels for the two suburbs are then matched (since labels for M2 may be mapped to different labels of M3) using the \href{https://en.wikipedia.org/wiki/Hungarian_algorithm}{Hungarian Algorithm} for optimal label assignment between the cluster labels arising out of M2 and M3. 
-
-After matching the labels, $16$ (47\%) suburbs got the same labels, and the indices are given <here>.
-
+$ARI=..., NMI=...$
 
 
 \subsection{A.3}
@@ -203,7 +198,7 @@ $H_0:$ \textit{There is no spatial autocorrelation between the observations}
 
 with significance level set to $\alpha =0.05$. Weight matrix was constructed using KNN with $k=8$ (\href{https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/spatial-autocorrelation.htm}{Recommendation}) due to the varying spatial density of the suburbs.
 
-We then run Moran's I test for each individual features across all the suburbs considered for the metrics of M2 and M3 and note the $p-value$ (Note: This test takes in only one feature at a time). If $p<\alpha$ for a feature $F$, we conclude that $F$ has significant spatial autocorrelation, i.e. geographic proximity has significant effect on $F$.
+We then run Moran's I test (without reducing power of the test) for each individual features across all the suburbs considered for the metrics of M2 and M3 and note the $p-value$ (Note: This test takes in only one feature at a time). If $p<\alpha$ for a feature $F$, we conclude that $F$ has significant spatial autocorrelation, i.e. geographic proximity has significant effect on $F$.
 
 \subsubsection{M2}\leavevmode
 
@@ -219,11 +214,7 @@ Moran's I p-value: 0.31300
 
 Procrustes Disparity between suburb $L^2$ distances and M2: 0.868
 
-<Table for Moran's I significant>
-
-<Figure for MI for M2>
-
-<Local Moran Figures>
+<Table> <Figure> <Local Moran>
 
 
 
@@ -235,17 +226,15 @@ Procrustes Disparity between suburb $L^2$ distances and M2: 0.868
 
 Procrustes Disparity between suburb $L^2$ distances and M3: 0.747
 
-<Table for Moran's I significant>
-
-<Figure for MI for M3>
-
-<Local Moran Figures>
+<Table> <Figure> <Local Moran>
 
 ---- 
 
 \subsubsection{Conclusion}\leavevmode
 
 The data partially supports the hypothesis, and depends on the perspective and the metric chosen. Some features being considered under the same metric may be significantly affected by physical proximity, while some may not be. Thus, we decided to consider the weight contributed by the feature values. Unsurprisingly, due to larger weight of M3 features as compared to M2, the disparity between the physical distance based proximity and M3 is much lower than that of disparity between M2 and physical distance.
+
+\pagebreak
 
 \section{Part B}
 
