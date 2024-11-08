@@ -1,0 +1,26 @@
+
+\subsubsection{Spatial Relationship Summaries}
+
+\textbf{1. Pair: \textit{(‘Top occupation, \%’, ‘Holds degree or higher, \%’)}} 
+
+The analysis between the percentage of the population in top occupations and those holding a degree or higher reveals a strong, positive relationship. Locally, areas with a higher percentage of degree holders tend to also have a greater proportion of the population in top occupations. This suggests that educational attainment plays a key role in determining the types of occupations in a region, and that higher education could be a driving factor for the prevalence of high-status jobs. Interestingly, while the direct effect is significant, there is also a spillover effect in neighboring regions, though it is weaker and somewhat negative, implying that the influence of education on occupation types is not entirely confined to local boundaries.
+
+\textbf{2. Pair: \textit{(‘Top occupation, \%’, ‘Did not complete year 12, \%’)}} 
+
+The relationship between the percentage of people in top occupations and those who did not complete year 12 shows a clear negative association. Areas where a larger proportion of the population has not completed year 12 tend to have fewer individuals in high-status occupations. This suggests that a lack of formal education (specifically high school completion) may hinder individuals’ access to top-tier jobs. The spillover effect is also negative, though weaker, meaning that neighboring regions with low educational attainment also suffer from a reduced presence of top occupations. This points to education being a critical factor in shaping the employment landscape, and regions with lower educational outcomes may face broader socio-economic challenges.
+
+\textbf{3. Pair: \textit{(‘Did not complete year 12, \%’, ‘Holds degree or higher, \%’)}} 
+
+This pair illustrates an inverse relationship between the percentage of individuals who did not complete year 12 and those holding a degree or higher. The findings suggest that regions with a lower rate of high school completion tend to have fewer individuals with higher education degrees. This aligns with the expectation that a lack of basic education is likely to impede further educational attainment. While the direct effect is strong, the spillover effect is minor but positive, meaning that a region’s educational outcomes have some influence on neighboring areas as well. The overall relationship reaffirms the importance of early education as a foundation for higher educational achievements.
+
+\textbf{4. Pair: \textit{(‘Equivalent household income <\$600/week, \%’, ‘IRSD (avg)’)}} 
+
+This relationship between low household income and the Index of Relative Socio-Economic Disadvantage (IRSD) shows a negative association. Regions with a higher proportion of households earning less than \$600 per week tend to have a lower average IRSD, which indicates a higher degree of socio-economic disadvantage. This suggests that low-income households are clustered in areas that are already socio-economically disadvantaged. The spillover effect is also negative, pointing to a broader regional pattern where socio-economic deprivation in one area is mirrored by surrounding areas. This highlights the compounded nature of poverty and disadvantage across neighboring regions.
+
+
+\textbf{5. Pair: \textit{(‘Equivalent household income <\$600/week, \%’, ‘Dwellings with no internet, \%’)}} 
+
+The relationship between low household income and the percentage of dwellings without internet access presents a strong positive association. Regions with higher proportions of low-income households tend to have a higher percentage of homes without internet, indicating a potential digital divide in socio-economically disadvantaged areas. This suggests that low-income households may lack access to basic technological infrastructure, which could limit educational, employment, and social opportunities. The spillover effect further amplifies this trend, showing that neighboring regions with high levels of income inequality also face similar challenges in internet access. This highlights the intersubsection of socio-economic disadvantage and digital exclusion, with implications for access to information and services in modern society.
+
+
+
