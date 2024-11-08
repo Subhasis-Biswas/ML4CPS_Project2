@@ -151,12 +151,7 @@ Here we'll be going through how the similarity metrics were defined and the rela
 
 Now, max distance of any suburb from our origin $O$ (Melbourne GPO) is 68km. So, maximum pairwise distance that can be is $2\times 68=136$ km. The curvature of the Earth causes a drop of around $1.45km$ [\href{https://earthcurvature.com/}{Calculator}] across this distance. As this is quite small, it's ignored and the entire region is treated as flat. We then convert $Polar$ to $Cartesian$ using the formula 
 
-\[
-x = r \cdot \sin\left(\frac{\pi}{180} \cdot \theta\right)
-\]
-\[
-y = r \cdot \cos\left(\frac{\pi}{180} \cdot \theta\right)
-\] [$y$ axis aligns with $0^\circ$, so $\sin$ and $\cos$ are swapped]. The goal is to check for physical proximity of the suburbs, using the $L^2$ norm.
+$(x, y) = \big(r\sin\left(\frac{\pi\theta}{180}\right), r\cos\left(\frac{\pi\theta}{180}\right)\big)$ [$y$ axis aligns with $0^\circ$, so $\sin$ and $\cos$ are swapped]. The goal is to check for physical proximity of the suburbs, using the $L^2$ norm.
 
 \textbf{M2}: Each feature under the $Services$ catgory is considered and min-max scaled. Before Scaling StDev <Figure> and After Scaling StDev <Figure>. Afterwards, mean was taken across the scaled feature-values under the Services category per row (suburb by suburb), which is named as the $Services \ Score$ for that suburb. The distribution of is as such <Figure>. Similarity between suburbs from this perspective is defined as the absolute difference between the corresponding services' score. This is the pairwise similarity heatmap <Figure>. The aim is to quantify how well-equipped a suburb is in terms of the said facilities and to check for similar amount of services provided in other suburbs. However, some feature values like \textit{Aged Care (Low Care)} dominate over the others. Thus, scaling is required. 
 
