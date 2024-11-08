@@ -280,7 +280,11 @@ Correlation (Pearson): 0.9130
 
 $R^2$ for Linear Regression: 0.8336
 
-As can be seen, a lot of the separations can be explained by a linear relationship between the two variables.
+However, Moran's I p-value for the OLS residuals: 0.003 (non-independent error terms)
+
+Thus, we use Spatial-Durbin Model (since both dependent and independent variables are autocorrelated). 
+
+We get significance.
 
 Now, let us check if population density has anything to do with the distance to the nearest hospital. The initial guess is that due to the lesser availability of essential services, with increasing distance, the density should also decay. We log-transform the travel-time. <Figure>
 
@@ -289,6 +293,10 @@ We can observe a linear decay in population density wrt $\log(distance \ to \ ne
 Correlation (Pearson): -0.7364
 
 $R^2: 0.5422$
+
+Again, spatial autocorrelation detected in residuals with MI p-value 0.0030.
+
+Using Spatial Durbin: $coeff(\log(dist))=-241.89480$; $p-value=0.00001$; $population\_density\_lag= 0.59778 (p-val 0.00073)$; Psedo-$R^2=0.65$
 
 Next up, we can ask, whether non-essential (Category 4 and 5) emergency visits decrease with distances to the hospitals with emergency services.
 
@@ -302,6 +310,10 @@ Another aspect is that the injuries can be spatially clustered by LISA. Disregar
 MENTION MORAN's I VALUES FOR ALL.
 
 \subsection{Population Increase/Decrease trend with distance}
+
+No significant spatial pattern observed, other than mild patterns in birth rates. Lots of outliers. Mention boxplots.
+
+\subsection{}
 
 
 
