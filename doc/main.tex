@@ -94,6 +94,7 @@
 \usepackage{enumitem} % Recommended package for list customization
 
 \setlist[itemize]{topsep=1pt, itemsep=0pt, parsep=1pt, partopsep=0pt}
+\setlist[enumerate]{topsep=1pt, itemsep=0pt, parsep=1pt, partopsep=0pt}
 \setlength{\topsep}{0pt}     % Space before and after the environment
 \setlength{\partopsep}{0pt}   % Extra space added before if needed
 \setlength{\parskip}{0pt}     % Space between paragraphs inside verbatim (optional)
@@ -248,69 +249,52 @@ The data partially supports the hypothesis, and depends on the perspective and t
 
 \section{Part B}
 
+\subsection{B1.}
 
-\subsection{Hospital Analysis Outline}
+\subsubsection{Analysis focused on Hospitals}
 
-<Public hospital separation plot>
+We collected the actual locations of the hospitals from Google Maps and plotted them, in order to get an approximate idea of their positions. <Figure>
 
-We collected the actual locations of the hospitals from Google Maps and plotted them, in order to get an idea of their positions. <Figure>
-
-We do a distribution plot for 'Distance to nearest public hospital (km)'. <Figure>
-
-This are the plots depicting the which hospitals (with and without emergency) serve how much of the nearest population. <Fig1> <Fig2>
-
-These are the tables for the same <Tab1> <Tab2>
-
-We bin the distances according to Freedman-Diaconis rule. The formula:
-
-$\text{Bin Width} = 2 \times \frac{\text{IQR}}{\sqrt[3]{n}}$
+To guide our analysis, we prepared followed the questions:
+\begin{enumerate}
+  \item \textit{Are hospital separations in proportion to the city population?}
+  \item \textit{How do the population density vary as distance to the nearest hospital grows?}
+  \item \textit{Do nearby hospitals with emergency departments to the populations experience a greater load of unnecessary emergency visits?}
+\end{enumerate}
 
 
+\textbf{Question 1:} Visually the dependence looks quite linear. The notion is further strengthened by the correlation coefficient and through simple linear regression. Although the assumptions of linear regression are violated here, we apply anyway and check for non-independence within the model residuals $\epsilon_i$ (which must be independent for simple linear regression). 
+
+Correlation (Pearson): 0.9130; $R^2$ for Linear Regression: 0.8336
+
+As we can see, OLS explains a lot of the variation. 
+
+However, Moran's I p-value for the OLS residuals (using same config as in Part A) is 0.003 which implies autocorrelated error terms. Thus inferring anything from the p-values of OLS might lead to false conclusion.
+
+Thus, we resort to using the Spatial-Durbin Model\textsuperscript{\cite{atikah2021efficiency} \cite{Anselin1988} \cite{doi:10.1080/17421770601009841}} (SDM) which can handle both autocorrelated predictor and predicted variables. The following are the relevant outcome of SDM and the plots.
+
+<Table><Figure>
+
+\textbf{Question 2:} We take the logarithm of the distance to the nearest hospital.
+
+We can observe an approximate linear decay in population density wrt the log-transformed distances with correlation (Pearson)= -0.7364. The following are results of SDM and the figures.
+
+\textbf{Question 3:} Visually a decreasing trend can be observed. correlation (Pearson)$= -0.6869$
 
 
-We check if the hospital separations of each of the suburbs are linearly related to the respective total populations of 2012. The initial guess is that they should be. <Figure>
-
-Correlation (Pearson): 0.9130
-
-$R^2$ for Linear Regression: 0.8336
-
-However, Moran's I p-value for the OLS residuals: 0.003 (non-independent error terms)
-
-Thus, we use Spatial-Durbin Model (since both dependent and independent variables are autocorrelated). 
-
-We get significance.
-
-Now, let us check if population density has anything to do with the distance to the nearest hospital. The initial guess is that due to the lesser availability of essential services, with increasing distance, the density should also decay. We log-transform the travel-time. <Figure>
-
-We can observe a linear decay in population density wrt $\log(distance \ to \ nearest \ public \ hospital)$. We try a least-square fit of a linear model. 
-
-Correlation (Pearson): -0.7364
-
-$R^2: 0.5422$
-
-Again, spatial autocorrelation detected in residuals with MI p-value 0.0030.
-
-Using Spatial Durbin: $coeff(\log(dist))=-241.89480$; $p-value=0.00001$; $population\_density\_lag= 0.59778 (p-val 0.00073)$; Psedo-$R^2=0.65$
-
-Next up, we can ask, whether non-essential (Category 4 and 5) emergency visits decrease with distances to the hospitals with emergency services.
-
-The boxplot <Figure> indeed shows a decreasing trend as the distances grow. The intervals are considered according to the said rule.
-
-
-Another aspect is that the injuries can be spatially clustered by LISA. Disregarding the significance, we can plot the means of the distance to GPO for each cluster vs means of \% of injuries as emergency. We can clearly see an increasing trend as the distance from the Melbourne GPO increases, i.e. outskirts have more fraction of emergency as injuries.
-
-
-
-MENTION MORAN's I VALUES FOR ALL.
-
-\subsection{Socio-Demographic}
+\subsubsection{Socio-Demographic Analysis}
 Only the numeric features for the suburbs without any missing values were considered. Amongst them we narrow down the features to only those with significant spatial autocorrelation (MI) <LIST>. 
 
 As a next step, correlation matrix was plotted. <Corrplot>. The features were further narrowed down by imposing the criteria of having correlation coeff of at least $0.7$ between any two features. <Corrplot>
 
 
+\subsection{B2}
 
-\subsubsection{Spatial Relationship Summaries}
+\subsubsection{Hospital Analysis: Interpretation}
+
+nice
+
+\subsubsection{Socio-Demographic Analysis: Interpretation}\leavevmode
 
 \textbf{1. Pair: \textit{(‘Top occupation, \%’, ‘Holds degree or higher, \%’)}} 
 
@@ -380,7 +364,7 @@ The relationship between low household income and the percentage of dwellings wi
 \input{table_index.tex}
 
 
-
+\twocolumn
 \printbibliography
 
 \end{document}
