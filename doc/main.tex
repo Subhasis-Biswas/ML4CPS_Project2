@@ -279,13 +279,13 @@ Thus, we resort to using the Spatial-Durbin Model\textsuperscript{\cite{atikah20
 
 We can observe an approximate linear decay in population density wrt the log-transformed distances with correlation (Pearson)= -0.7364. The following are results of SDM and the figures.
 
-\textbf{Question 3:} Visually a decreasing trend can be observed. correlation (Pearson)$= -0.6869$
+\textbf{Question 3:} Visually a decreasing trend can be observed. correlation (Pearson)$= -0.6869$. <Figure> <Table>
 
 
 \subsubsection{Socio-Demographic Analysis}
-Only the numeric features for the suburbs without any missing values were considered. Amongst them we narrow down the features to only those with significant spatial autocorrelation (MI) <LIST>. 
+Only the numeric features for the suburbs without any missing values were considered. Amongst them we narrowed down the features to only those with significant spatial autocorrelation (Moran's I). Next, Pearson and Spearman correlation-coefficients was considered between every pair of spatially autocorrelated features and only the pairs with both correlation-coefficients  $>0.7$ or $<-0.7$ are considered for further analysis. The correlation plot for the finally considered features is such <Figure>. 
 
-As a next step, correlation matrix was plotted. <Corrplot>. The features were further narrowed down by imposing the criteria of having correlation coeff of at least $0.7$ between any two features. <Corrplot>
+Using this above procedure we selected 8 features out of 56 total features in the socio-demographic category. Although we are missing out on information, we still can capture some important aspects.
 
 
 \subsection{B2}
@@ -362,6 +362,11 @@ The relationship between low household income and the percentage of dwellings wi
 \clearpage
 
 \input{table_index.tex}
+\input{spatial_durbin_model_summary.tex}
+
+\begin{small}
+  y: Dependent Variable, X: Predictor Variable, const: Constant Coefficient, const\_pval: Constant p-value, x\_coef: Predictor Coefficient, x\_pval: Predictor p-value, y\_lag: Dependent Variable Lag, y\_pval: p-value for Dependent Lag, x\_lag: Predictor Variable Lag, x\_pval: p-value for Predictor Lag, pR\^{}2: Pseudo R-squared, d\_imp: Direct Impact, i\_imp: Indirect Impact, t\_imp: Total Impact.
+\end{small}
 
 
 \twocolumn
