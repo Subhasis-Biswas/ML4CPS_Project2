@@ -30,3 +30,6 @@ country_high_res/
 
 # Ignore LaTeX build directory if present
 build/
+
+*.png
+*.jpg

@@ -35,6 +35,7 @@
 \usepackage{url}
 
 \usepackage{graphicx}             % For including images
+\usepackage{subfigure}
 \usepackage{adjustbox}            % For scaling and packing
 \usepackage{subcaption}           % For subfigures
 \usepackage{xcolor}         % For color names
@@ -96,7 +97,7 @@
 \setlength{\topsep}{0pt}     % Space before and after the environment
 \setlength{\partopsep}{0pt}   % Extra space added before if needed
 \setlength{\parskip}{0pt}     % Space between paragraphs inside verbatim (optional)
-
+\graphicspath{{figures/}}
 
 
 %----------------------------------------------------------------------------------------
@@ -331,7 +332,50 @@ The relationship between low household income and the percentage of dwellings wi
 
 
 
+\pagebreak
 
+\onecolumn
+
+\begin{figure}[htbp]
+  \vspace{-1cm}
+  \centering
+  \subfigure[Joint Density of Suburb (Relative) Coordinates]{
+      \includegraphics[scale=0.4]{figures/joint_density.png}
+      \label{fig:jd_suburb}
+  }
+  \hspace{-0.3cm} % Adjust horizontal spacing
+  \subfigure[MDS Plot of Population Fraction]{
+      \includegraphics[scale=0.3]{suburbs_cartesian.png}
+      \label{fig:mds_services}
+  }
+  
+  \vspace{-0.4cm} % Adjust vertical spacing between rows of figures
+  
+  \subfigure[placeholder]{
+      \includegraphics[scale=0.5]{mds_services.png}
+      \label{fig:mds_services_placeholder}
+  }
+  \subfigure[placeholder]{
+    \includegraphics[scale=0.5]{MDS_Population_Fraction.png}
+    \label{fig:mds_services_placeholder}
+}
+  \hspace{-0.4cm}
+  \subfigure[placeholder]{
+      \includegraphics[scale=0.5]{spectral_clustering.png}
+      \label{fig:spectral_clustering}
+  }
+\end{figure}
+
+\begin{figure}
+  \includegraphics[scale=0.5]{moran_i_analysis.png}
+\end{figure}
+
+
+
+\pagebreak
+\clearpage
+
+\input{table_index.tex}
 
 
 
