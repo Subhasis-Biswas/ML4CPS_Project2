@@ -263,7 +263,7 @@ To guide our analysis, we prepared followed the questions:
 \end{enumerate}
 
 
-\textbf{Question 1:} Visually the dependence looks quite linear. The notion is further strengthened by the correlation coefficient and through simple linear regression. Although the assumptions of linear regression are violated here, we apply anyway and check for non-independence within the model residuals $\epsilon_i$ (which must be independent for simple linear regression). 
+\textit{Q1:} Visually the dependence looks quite linear. The notion is further strengthened by the correlation coefficient and through simple linear regression. Although the assumptions of linear regression are violated here, we apply anyway and check for non-independence within the model residuals $\epsilon_i$ (which must be independent for simple linear regression). 
 
 Correlation (Pearson): 0.9130; $R^2$ for Linear Regression: 0.8336
 
@@ -275,9 +275,9 @@ Thus, we resort to using the Spatial-Durbin Model\textsuperscript{\cite{atikah20
 
 <Table><Figure>
 
-\textbf{Question 2:} We can observe an approximate linear decay in population density wrt the distances with correlation (Pearson)= -0.7364. The following are results of SDM and the figures.
+\textit{Q2:} We can observe an approximate linear decay in population density wrt the distances with correlation (Pearson)= -0.7364. The following are results of SDM and the figures.
 
-\textbf{Question 3:} Visually a decreasing trend can be observed. correlation (Pearson)$= -0.6869$. <Figure> <Table>
+\textit{Q3:} Visually a decreasing trend can be observed. correlation (Pearson)$= -0.6869$. <Figure> <Table>
 
 
 \subsubsection{Socio-Demographic Analysis}
@@ -288,9 +288,14 @@ Using this above procedure we selected 8 features out of 56 total features in th
 
 \subsection{B2}
 
-\subsubsection{Hospital Analysis: Interpretation}
+\subsubsection{Hospital Analysis: Interpretation}\leavevmode
 
-nice
+\textit{Q1:} Hospital separations show a positive, statistically significant association with population size (\textit{x\_coef} = 0.26826, \textit{p} = 0.0000), indicating that separations increase as population grows. Spatial autocorrelation (\textit{y\_lag} = 0.61501, \textit{p} = 0.00112) suggests high-separation areas tend to cluster together.
+
+\textit{Q2:} Population density decreases significantly with distance from the nearest hospital (\textit{x\_coef} = -242.925, \textit{p} = 0.00030), implying hospitals are often located near higher-density areas. Spatial autocorrelation (\textit{y\_lag} = 0.60337, \textit{p} = 0.00179) shows neighboring areas share similar population density.
+
+\textit{Q3:} There is a negative relationship between non-urgent emergency visits and distance to the nearest hospital (\textit{x\_coef} = -0.41756, \textit{p} = 0.01361), suggesting people closer to emergency departments use them more for non-urgent cases. A strong spatial lag (\textit{y\_lag} = 0.75407, \textit{p} = 0.00000) indicates neighboring regions exhibit similar patterns in emergency department use.
+
 
 \subsubsection{Socio-Demographic Analysis: Interpretation}\leavevmode
 
