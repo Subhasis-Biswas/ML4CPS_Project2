@@ -1,0 +1,6 @@
+y,X,const,const_pval,x_coef,x_pval,y_lag,y_pval,x_lag,x_pval.1,pR^2,d_imp,i_imp,t_imp
+"Public hospital separations, 2012-13","2012 ERP, total",369.29232,0.71421,0.26826,0.0,0.61501,0.00112,-0.19997,0.02972,0.8661,0.2683,-0.0909,0.1774
+Population Density,Distance to nearest public hospital,2176.54008,0.03923,-242.925,0.0003,0.60337,0.00179,7.15246,0.96357,0.6553,-242.925,-351.5104,-594.4354
+"Category 4 & 5 emergency department presentations, %",Distance to nearest public hospital with emergency department,17.09197,0.03623,-0.41756,0.01361,0.75407,0.0,-0.3314,0.41874,0.6102,-0.4176,-2.6279,-3.0455
+"Holds degree or higher, %","Top occupation, %",-13.8749,0.01561,1.13616,0.0,0.55277,0.00729,0.02518,0.95674,0.8985,1.1362,1.4606,2.5968
+"Equivalent household income <$600/week, %","Dwellings with no internet, %",2.97949,0.64077,1.39183,0.0,0.63805,0.00037,-0.68184,0.20127,0.7293,1.3918,0.5698,1.9616

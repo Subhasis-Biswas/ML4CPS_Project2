@@ -142,7 +142,7 @@
 \vspace{-3pt}
 
 \begin{small}
-  \textit{Note:} \hyperref[tab:merged_community_names_serial]{Table~\ref{tab:merged_community_names_serial}} serves as a lookup table for the suburb name-to-index mapping, whenever the names of the suburbs themselves are too long to mention.
+  \textit{Notes:} \hyperref[tab:merged_community_names_serial]{Table~\ref{tab:merged_community_names_serial}} serves as a lookup table for the suburb name-to-index mapping, whenever the names of the suburbs themselves are too long to mention. \textit{Spatial Autocorrelation} and \textit{SA} used in text interchangeably.
 \end{small}
 
 \section{Part A}
@@ -312,16 +312,25 @@ For both \textit{Q1} and \textit{Q2} we employed SDM for establishing relationsh
 
 \subsubsection{Socio-Demographic Analysis: Interpretation}\leavevmode
 
-\textit{Q1:} 
+\textit{Q1:} The percentage of people holding a degree or higher shows a positive, statistically significant association with the percentage of people in top occupations ($x_{\text{coef}} = 1.13616$, $p = 0.0000$), indicating that higher top occupation percentages are linked to higher educational attainment. The spatial autocorrelation ($y_{\text{lag}} = 0.55277$, $p = 0.00729$) suggests that high educational attainment areas tend to cluster together.
 
-\textit{Q2:} 
+\textit{Q2:} The percentage of households with income less than \$600 per week shows a positive, statistically significant association with the percentage of dwellings with no internet ($x_{\text{coef}} = 1.39183$, $p = 0.0000$), indicating that areas with more dwellings lacking internet tend to have higher proportions of low-income households. The spatial autocorrelation ($y_{\text{lag}} = 0.63805$, $p = 0.00037$) suggests that low-income areas tend to cluster together.
 
-\textit{Q2:} 
+\textit{Q3:} The percentage of individuals who did not complete year 12 shows a positive, statistically significant association with spatial clustering, with high values forming a High-High cluster (\text{mean} = 52.41\%, \text{std} = 7.30) and low values forming a Low-Low cluster (\text{mean} = 21.59\%, \text{std} = 4.86). This indicates that areas with higher rates of non-completion tend to cluster together, especially farther from the Melbourne GPO (\text{mean distance for High-High cluster} = 85.17 \ \text{km}, p < 0.05), while lower rates cluster closer to the center (\text{mean distance for Low-Low cluster} = 7.30 \ \text{km}, p < 0.05).
+
 
 
 \subsection{B3}
 
-placeholder
+\subsubsection{Reflection upon Hospital Analysis} \leavevmode
+ 
+This analysis was essential because visual inspection alone couldn’t reveal the subtle spatial dependencies and correlations within the data, such as the influence of hospital proximity and population density on healthcare demand across Melbourne’s suburbs. By using spatial and statistical modeling, we uncovered critical insights that enable targeted community interventions. For example, these findings support strategic decisions on hospital placement and emergency resource allocation in high-demand areas, suggest adjustments to healthcare services in densely populated neighborhoods, and offer direction for long-term urban planning to ensure equitable access to healthcare. These data-driven actions promote community well-being by improving healthcare accessibility and efficiency, particularly for underserved regions.
+
+\subsubsection{Reflection upon Socio-Demographic Analysis}\leavevmode
+
+This analysis was essential because visual inspection alone couldn’t reveal the subtle spatial dependencies and correlations within the data, such as the link between employment in top occupations and education levels, the “digital divide” tied to income and internet access, or local clusters of low educational attainment. By using spatial and statistical modeling, we gained precise insights that allow for targeted community interventions. For example, we can create tailored education and job programs in lower-education areas, invest in digital infrastructure to close the internet access gap in low-income neighborhoods, and concentrate resources in areas with low school completion rates. These data-driven actions help build a more equitable community by directly addressing socioeconomic disparities.
+
+
 
 
 
