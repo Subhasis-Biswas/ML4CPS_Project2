@@ -269,15 +269,13 @@ Correlation (Pearson): 0.9130; $R^2$ for Linear Regression: 0.8336
 
 As we can see, OLS explains a lot of the variation. 
 
-However, Moran's I p-value for the OLS residuals (using same config as in Part A) is 0.003 which implies autocorrelated error terms. Thus inferring anything from the p-values of OLS might lead to false conclusion.
+However, Moran's I p-value for the OLS residuals (using same config as in Part A) is 0.0023 which implies autocorrelated error terms. Thus inferring anything from the p-values of OLS might lead to false conclusion.
 
 Thus, we resort to using the Spatial-Durbin Model\textsuperscript{\cite{atikah2021efficiency} \cite{Anselin1988} \cite{doi:10.1080/17421770601009841}} (SDM) which can handle both autocorrelated predictor and predicted variables. The following are the relevant outcome of SDM and the plots.
 
 <Table><Figure>
 
-\textbf{Question 2:} We take the logarithm of the distance to the nearest hospital.
-
-We can observe an approximate linear decay in population density wrt the log-transformed distances with correlation (Pearson)= -0.7364. The following are results of SDM and the figures.
+\textbf{Question 2:} We can observe an approximate linear decay in population density wrt the distances with correlation (Pearson)= -0.7364. The following are results of SDM and the figures.
 
 \textbf{Question 3:} Visually a decreasing trend can be observed. correlation (Pearson)$= -0.6869$. <Figure> <Table>
 
