@@ -324,17 +324,18 @@ For both \textit{Q1} and \textit{Q2} we employed SDM for establishing relationsh
 
 \subsubsection{Reflection upon Hospital Analysis} \leavevmode
  
-This analysis was essential because visual inspection alone couldn’t reveal the subtle spatial dependencies and correlations within the data, such as the influence of hospital proximity and population density on healthcare demand across Melbourne’s suburbs. By using spatial and statistical modeling, we uncovered critical insights that enable targeted community interventions. For example, these findings support strategic decisions on hospital placement and emergency resource allocation in high-demand areas, suggest adjustments to healthcare services in densely populated neighborhoods, and offer direction for long-term urban planning to ensure equitable access to healthcare. These data-driven actions promote community well-being by improving healthcare accessibility and efficiency, particularly for underserved regions.
+This analysis was essential because visual inspection alone couldn’t reveal the subtle spatial dependencies and correlations within the data, such as the influence of hospital proximity and population density on healthcare demand across Melbourne’s suburbs. By using spatial and statistical modelling, we uncovered critical insights that enable targeted community interventions. For example, these findings support strategic decisions on hospital placement and emergency resource allocation in high-demand areas, suggest adjustments to healthcare services in densely populated neighborhoods, and offer direction for long-term urban planning to ensure equitable access to healthcare. These data-driven actions promote community well-being by improving healthcare accessibility and efficiency, particularly for underserved regions.
 
 \subsubsection{Reflection upon Socio-Demographic Analysis}\leavevmode
 
-This analysis was essential because visual inspection alone couldn’t reveal the subtle spatial dependencies and correlations within the data, such as the link between employment in top occupations and education levels, the “digital divide” tied to income and internet access, or local clusters of low educational attainment. By using spatial and statistical modeling, we gained precise insights that allow for targeted community interventions. For example, we can create tailored education and job programs in lower-education areas, invest in digital infrastructure to close the internet access gap in low-income neighborhoods, and concentrate resources in areas with low school completion rates. These data-driven actions help build a more equitable community by directly addressing socioeconomic disparities.
+This analysis was essential because visual inspection alone couldn’t reveal the subtle spatial dependencies and correlations within the data, such as the link between employment in top occupations and education levels, the “digital divide” tied to income and internet access, or local clusters of low educational attainment. By using spatial and statistical modelling, we gained precise insights that allow for targeted community interventions. For example, we can create tailored education and job programs in lower-education areas, invest in digital infrastructure to close the internet access gap in low-income neighborhoods, and concentrate resources in areas with low school completion rates. These data-driven actions help build a more equitable community by directly addressing socioeconomic disparities.
 
 
 
 
 
 \pagebreak
+\clearpage
 
 \onecolumn
 
@@ -368,23 +369,33 @@ This analysis was essential because visual inspection alone couldn’t reveal th
   }
 \end{figure}
 
+
 \begin{figure}
+  \vspace{0cm}
   \includegraphics[scale=0.5]{moran_i_analysis.png}
   \caption{Moran's I analysis for the features}
   \label{fig:moran_part_A}
 \end{figure}
 
 
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{hosp_full_with_labels.png}
+\end{figure}
+
 
 \pagebreak
 \clearpage
 
-\input{table_index.tex}
 \input{spatial_durbin_model_summary.tex}
+
+\input{table_index.tex}
+
 
 \begin{small}
   y: Dependent Variable, X: Predictor Variable, const: Constant Coefficient, const\_pval: Constant p-value, x\_coef: Predictor Coefficient, x\_pval: Predictor p-value, y\_lag: Dependent Variable Lag, y\_pval: p-value for Dependent Lag, x\_lag: Predictor Variable Lag, x\_pval: p-value for Predictor Lag, pR\^{}2: Pseudo R-squared, d\_imp: Direct Impact, i\_imp: Indirect Impact, t\_imp: Total Impact.
 \end{small}
+
 
 
 \twocolumn
