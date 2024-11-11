@@ -371,7 +371,7 @@ This analysis was essential because visual inspection alone couldn’t reveal th
 
 
 \begin{figure}
-  \vspace{0cm}
+  \vspace{-0.6cm}
   \includegraphics[scale=0.5]{moran_i_analysis.png}
   \caption{Moran's I analysis for the features}
   \label{fig:moran_part_A}
@@ -381,11 +381,20 @@ This analysis was essential because visual inspection alone couldn’t reveal th
 \begin{figure}
   \centering
   \includegraphics[scale=0.5]{hosp_full_with_labels.png}
+  \caption{Hospital Analysis Plots}
+  \label{fig:hosp_fig}
 \end{figure}
 
 
 \pagebreak
 \clearpage
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.45]{socio_demo_comb.png}
+  \caption{Socio-Demographic Analysis Plots}
+  \label{fig:socio_demo_fig}
+\end{figure}
 
 \input{spatial_durbin_model_summary.tex}
 
@@ -396,7 +405,23 @@ This analysis was essential because visual inspection alone couldn’t reveal th
   y: Dependent Variable, X: Predictor Variable, const: Constant Coefficient, const\_pval: Constant p-value, x\_coef: Predictor Coefficient, x\_pval: Predictor p-value, y\_lag: Dependent Variable Lag, y\_pval: p-value for Dependent Lag, x\_lag: Predictor Variable Lag, x\_pval: p-value for Predictor Lag, pR\^{}2: Pseudo R-squared, d\_imp: Direct Impact, i\_imp: Indirect Impact, t\_imp: Total Impact.
 \end{small}
 
-
+% \begin{table}[ht]
+%   \centering
+%   \begin{tabular}{|c|l|}
+%   \hline
+%   \textbf{No.} & \textbf{Feature} \\ \hline
+%   0 & Dwellings with no internet, \% \\ \hline
+%   1 & Personal income \$<400/week, \% \\ \hline
+%   2 & IRSD (avg) \\ \hline
+%   3 & Equivalent household income \$<600/week, \% \\ \hline
+%   4 & Did not complete year 12, \% \\ \hline
+%   5 & Holds degree or higher, \% \\ \hline
+%   6 & Top occupation, \% \\ \hline
+%   7 & IRSD (max) \\ \hline
+%   \end{tabular}
+%   \caption{List of Features for Correlation Plot}
+%   \end{table}
+  
 
 \twocolumn
 \printbibliography
