@@ -217,7 +217,7 @@ $H_0:$ \textit{There is no spatial autocorrelation between the observations}
 
 with significance level set to $\alpha =0.05$. Weight matrix was constructed using KNN with $k=8$ (\href{https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/spatial-autocorrelation.htm}{Recommendation}) due to the varying spatial density of the suburbs.
 
-We then run Moran's I test (without reducing power of the test) for each individual features across all the suburbs considered for the metrics of M2 and M3 and note the $p-value$ (Note: This test takes in only one feature at a time). If $p<\alpha$ for a feature $F$, we conclude that $F$ has significant spatial autocorrelation, i.e. geographic proximity has significant effect on $F$.
+We then run Moran's I test (without reducing power of the test) for each individual features across all the suburbs considered for the metrics of M2 and M3 and note the $p-value$ (Note: This test takes in only one feature at a time). If $p<\alpha$ for a feature $F$, we conclude that $F$ has significant spatial autocorrelation (SA), i.e. geographic proximity has significant effect on $F$.
 
 \subsubsection{M2}\leavevmode
 
@@ -259,17 +259,20 @@ The data partially supports the hypothesis, and depends on the perspective and t
 
 \subsubsection{Analysis focused on Hospitals}
 
-We collected the actual locations of the hospitals from Google Maps and plotted them, in order to get an approximate idea of their positions. <Figure>
+We collected the actual locations of the hospitals from Google Maps and plotted them, in order to get an approximate idea of their positions \hyperref[fig:hosp_fig]{Figure~\ref{fig:hosp_fig}}.
 
 To guide our analysis, we prepared followed the questions:
 \begin{enumerate}
-  \item[\textit{Q1.}] \textit{Are hospital separations in proportion to the city population?}
-  \item[\textit{Q2.}] \textit{How do the population density vary as distance to the nearest hospital grows?}
-  \item[\textit{Q3.}] \textit{Do nearby hospitals with emergency departments to the populations experience a greater fraction of unnecessary emergency visits?}
+  \item[\textit{HQ1.}] \textit{Are hospital separations in proportion to the city population?}
+  \item[\textit{HQ2.}] \textit{How do the population density vary as distance to the nearest hospital grows?}
+  \item[\textit{HQ3.}] \textit{Do nearby hospitals with emergency departments to the populations experience a greater fraction of unnecessary emergency visits?}
 \end{enumerate}
 
+Note: The relevant model outputs for this part are given in \hyperref[tab:summary_SDM]{SDM Summary Table~\ref{tab:summary_SDM}}. All the relevant figures are contained within \hyperref[fig:hosp_fig]{Figure~\ref{fig:hosp_fig}}. Each of \textit{HQ1, HQ2, HQ3} has its respective output and plots given in them.
 
-\textit{Q1:} Visually the dependence looks quite linear. The notion is further strengthened by the correlation coefficient and through simple linear regression. Although the assumptions of linear regression are violated here, we apply anyway and check for non-independence within the model residuals $\epsilon_i$ (which must be independent for simple linear regression). 
+
+
+\textit{HQ1:} Visually the dependence looks quite linear. The notion is further strengthened by the correlation coefficient and through simple linear regression. Although the assumptions of linear regression are violated here, we apply anyway and check for non-independence within the model residuals $\epsilon_i$ (which must be independent for simple linear regression). 
 
 Correlation (Pearson): 0.9130; $R^2$ for Linear Regression: 0.8336
 
@@ -277,60 +280,63 @@ As we can see, OLS explains a lot of the variation.
 
 However, Moran's I p-value for the OLS residuals (using same config as in Part A) is 0.0023 which implies autocorrelated error terms. Thus inferring anything from the p-values of OLS might lead to false conclusion.
 
-Thus, we resort to using the Spatial-Durbin Model\textsuperscript{\cite{atikah2021efficiency} \cite{Anselin1988} \cite{doi:10.1080/17421770601009841}} (SDM) which can handle both autocorrelated predictor and predicted variables. The following are the relevant outcome of SDM and the plots.
+Thus, we resort to using the Spatial-Durbin Model\textsuperscript{\cite{atikah2021efficiency} \cite{Anselin1988} \cite{doi:10.1080/17421770601009841}} (SDM) which can handle both autocorrelated predictor and predicted variables.
 
-<Table><Figure>
 
-\textit{Q2:} We can observe an approximate linear decay in population density wrt the distances with correlation (Pearson)= -0.7364. The following are results of SDM and the figures.
+\textit{HQ2:} We can observe an approximate linear decay in population density wrt the distances with correlation (Pearson)= -0.7364. The results of SDM are given in the said table.
 
-\textit{Q3:} Visually a decreasing trend can be observed. correlation (Pearson)$= -0.6869$. <Figure> <Table>
+\textit{HQ3:} Visually a decreasing trend can be observed. correlation (Pearson)$= -0.6869$. SDM results are given in the same table.
 
 
 \subsubsection{Socio-Demographic Analysis}
-Only the numeric features for the suburbs without any missing values were considered. Amongst them we narrowed down the features to only those with significant spatial autocorrelation (Moran's I). Next, Pearson and Spearman correlation-coefficients was considered between every pair of spatially autocorrelated features and only the pairs with both correlation-coefficients  $>0.7$ or $<-0.7$ are considered for further analysis. The correlation plot for the finally considered features is such <Figure>. We came down to 8 features in the said manner from a total of 56 features.
+Only the numeric features for the suburbs without any missing values were considered. Amongst them we narrowed down the features to only those with significant SA (Moran's I). Next, Pearson and Spearman correlation-coefficients was considered between every pair of spatially autocorrelated features and only the pairs with both correlation-coefficients  $>0.7$ or $<-0.7$ are considered for further analysis. We came down to 8 features in the said manner from a total of 56 features.
+
+Note: All the plots and numeric outputs for \textit{SDQ1, SDQ2, SDQ3} (as specified below) are contained within \hyperref[tab:summary_SDM]{SDM Summary Table~\ref{tab:summary_SDM}} and \hyperref[fig:socio_demo_fig]{Figure~\ref{fig:socio_demo_fig}}
 
 Afterwards we posed the following questions:
 
 \begin{enumerate}
-  \item[\textit{Q1.}] Does there exist a significant relation between the fraction of the population employed in the top occupation and the fraction of highly educated population?
-  \item[\textit{Q2.}] How do the fraction of dwellings without internet vary with household incomes?
-  \item[\textit{Q3.}] Is there a significant spatial pattern on a more local level regarding the lower level of education? 
+  \item[\textit{SDQ1.}] Does there exist a significant relation between the fraction of the population employed in the top occupation and the fraction of highly educated population?
+  \item[\textit{SDQ2.}] How do the fraction of dwellings without internet vary with household incomes?
+  \item[\textit{SDQ3.}] Is there a significant spatial pattern on a more local level regarding the lower level of education? 
 \end{enumerate}
 
-For both \textit{Q1} and \textit{Q2} we employed SDM for establishing relationships while for \textit{Q3} we used \textit{LISA}\textsuperscript{\cite{Anselin1995}, \cite{darribasLab_05}, \cite{geodacenterLocalSpatial}} to cluster the regions of lower educational level as per local spatial autocorrelation.
+For both \textit{SDQ1} and \textit{SDQ2} we employed SDM for establishing relationships while for \textit{SDQ3} we used \textit{LISA}\textsuperscript{\cite{Anselin1995}, \cite{darribasLab_05}, \cite{geodacenterLocalSpatial}} to cluster the regions of lower educational level as per local spatial autocorrelation.
 
 \subsection{B2}
 
-\subsubsection{Hospital Analysis: Interpretation}\leavevmode
+\subsubsection{Hospital Data Analysis: Interpretation}\leavevmode
 
-\textit{Q1:} Hospital separations show a positive, statistically significant association with population size (\textit{x\_coef} = 0.26826, \textit{p} = 0.0000), indicating that separations increase as population grows. Spatial autocorrelation (\textit{y\_lag} = 0.61501, \textit{p} = 0.00112) suggests high-separation areas tend to cluster together.
+\textit{HQ1:} Hospital separations show a positive, statistically significant association with population size (\textit{x\_coef} = 0.268, \textit{p} = 0.0000), indicating that separations increase as population grows. Spatial autocorrelation (\textit{y\_lag} = 0.615, \textit{p} = 0.001) suggests high-separation areas tend to cluster together.
 
-\textit{Q2:} Population density decreases significantly with distance from the nearest hospital (\textit{x\_coef} = -242.925, \textit{p} = 0.00030), implying hospitals are often located near higher-density areas. Spatial autocorrelation (\textit{y\_lag} = 0.60337, \textit{p} = 0.00179) shows neighboring areas share similar population density.
+\textit{HQ2:} Population density decreases significantly with distance from the nearest hospital (\textit{x\_coef} = -242.925, \textit{p} = 0.00030), implying hospitals are often located near higher-density areas. Spatial autocorrelation (\textit{y\_lag} = 0.603, \textit{p} = 0.00179) shows neighboring areas share similar population density.
 
-\textit{Q3:} There is a negative relationship between non-urgent emergency visits and distance to the nearest hospital (\textit{x\_coef} = -0.41756, \textit{p} = 0.01361), suggesting people closer to emergency departments use them more for non-urgent cases. A strong spatial lag (\textit{y\_lag} = 0.75407, \textit{p} = 0.00000) indicates neighboring regions exhibit similar patterns in emergency department use.
+\textit{HQ3:} There is a negative relationship between non-urgent emergency visits and distance to the nearest hospital (\textit{x\_coef} = -0.418, \textit{p} = 0.0136), suggesting people closer to emergency departments use them more for non-urgent cases. A strong spatial lag (\textit{y\_lag} = 0.754, \textit{p} = 0.000) indicates neighboring regions exhibit similar patterns in emergency department use.
 
 
 \subsubsection{Socio-Demographic Analysis: Interpretation}\leavevmode
 
-\textit{Q1:} The percentage of people holding a degree or higher shows a positive, statistically significant association with the percentage of people in top occupations ($x_{\text{coef}} = 1.13616$, $p = 0.0000$), indicating that higher top occupation percentages are linked to higher educational attainment. The spatial autocorrelation ($y_{\text{lag}} = 0.55277$, $p = 0.00729$) suggests that high educational attainment areas tend to cluster together.
+\textit{SDQ1:} The percentage of people holding a degree or higher shows a positive, statistically significant association with the percentage of people in top occupations ($x_{\text{coef}} = 1.13616$, $p = 0.0000$), indicating that higher top occupation percentages are linked to higher educational attainment. The SA of ($y_{\text{lag}} = 0.553$, $p = 0.00729$) suggests that high educational attainment areas tend to cluster together.
 
-\textit{Q2:} The percentage of households with income less than \$600 per week shows a positive, statistically significant association with the percentage of dwellings with no internet ($x_{\text{coef}} = 1.39183$, $p = 0.0000$), indicating that areas with more dwellings lacking internet tend to have higher proportions of low-income households. The spatial autocorrelation ($y_{\text{lag}} = 0.63805$, $p = 0.00037$) suggests that low-income areas tend to cluster together.
+\textit{SDQ2:} The percentage of households with income less than \$600 per week shows a positive, statistically significant association with the percentage of dwellings with no internet ($x_{\text{coef}} = 1.392$, $p = 0.0000$), indicating that areas with more dwellings lacking internet tend to have higher proportions of low-income households. The SA ($y_{\text{lag}} = 0.638$, $p = 0.00037$) suggests that low-income areas tend to cluster together.
 
-\textit{Q3:} The percentage of individuals who did not complete year 12 shows a positive, statistically significant association with spatial clustering, with high values forming a High-High cluster (\text{mean} = 52.41\%, \text{std} = 7.30) and low values forming a Low-Low cluster (\text{mean} = 21.59\%, \text{std} = 4.86). This indicates that areas with higher rates of non-completion tend to cluster together, especially farther from the Melbourne GPO (\text{mean distance for High-High cluster} = 85.17 \ \text{km}, p < 0.05), while lower rates cluster closer to the center (\text{mean distance for Low-Low cluster} = 7.30 \ \text{km}, p < 0.05).
+\textit{SDQ3:} The percentage of individuals who did not complete year 12 shows a positive, statistically significant association with spatial clustering, with high values forming a High-High cluster (\text{mean} = 52.41\%, \text{std} = 7.30) and low values forming a Low-Low cluster (\text{mean} = 21.59\%, \text{std} = 4.86). This indicates that areas with higher rates of non-completion tend to cluster together, especially farther from the Melbourne GPO (\text{mean distance for High-High cluster} = 85.17 \ \text{km}, p < 0.05), while lower rates cluster closer to the center (\text{mean distance for Low-Low cluster} = 7.30 \ \text{km}, p < 0.05).
 
 
 
 \subsection{B3}
 
-\subsubsection{Reflection upon Hospital Analysis} \leavevmode
+\subsubsection{Reflection upon Hospital Data Analysis} \leavevmode
  
-This analysis was essential because visual inspection alone couldn’t reveal the subtle spatial dependencies and correlations within the data, such as the influence of hospital proximity and population density on healthcare demand across Melbourne’s suburbs. By using spatial and statistical modelling, we uncovered critical insights that enable targeted community interventions. For example, these findings support strategic decisions on hospital placement and emergency resource allocation in high-demand areas, suggest adjustments to healthcare services in densely populated neighborhoods, and offer direction for long-term urban planning to ensure equitable access to healthcare. These data-driven actions promote community well-being by improving healthcare accessibility and efficiency, particularly for underserved regions.
+This analysis highlighted spatial dependencies that weren’t immediately visible. For instance, hospital separations increase with population size, and hospitals are often located near higher-density areas. We also saw that non-urgent emergency visits are more common closer to emergency departments, with similar patterns appearing in neighboring areas. These insights can help with decisions on hospital locations, emergency resource allocation, and adjusting healthcare services in denser areas, supporting better access to healthcare across Melbourne.
 
 \subsubsection{Reflection upon Socio-Demographic Analysis}\leavevmode
 
-This analysis was essential because visual inspection alone couldn’t reveal the subtle spatial dependencies and correlations within the data, such as the link between employment in top occupations and education levels, the “digital divide” tied to income and internet access, or local clusters of low educational attainment. By using spatial and statistical modelling, we gained precise insights that allow for targeted community interventions. For example, we can create tailored education and job programs in lower-education areas, invest in digital infrastructure to close the internet access gap in low-income neighborhoods, and concentrate resources in areas with low school completion rates. These data-driven actions help build a more equitable community by directly addressing socioeconomic disparities.
+In a similar way, the socio-demographic analysis revealed patterns like a link between education levels and employment in top occupations, an association between low-income households and internet access, and clusters of areas with lower educational attainment farther from Melbourne's center. These insights can guide initiatives like targeted job programs, investments in digital access for low-income neighborhoods, and support for communities with lower school completion rates, helping to address socioeconomic disparities.
 
+\subsection{Personal Remarks}
 
+In this project we used a variety of well-established techniques in spatial econometrics to gain insights that traditional ML models might struggle to capture. \href{https://en.wikipedia.org/wiki/Luc_Anselin}{Luc Anselin's} pioneering works\textsuperscript{\cite{Anselin1988}, \cite{Anselin1995}} has paved the way for regional sciences. His contributions continue to shape spatial analysis, enabling data-driven insights that support targeted, effective decision-making.
 
 
 
@@ -378,10 +384,13 @@ This analysis was essential because visual inspection alone couldn’t reveal th
 \end{figure}
 
 
+
+
+
 \begin{figure}
   \centering
   \includegraphics[scale=0.5]{hosp_full_with_labels.png}
-  \caption{Hospital Analysis Plots}
+  \caption{Hospital Data Analysis Plots}
   \label{fig:hosp_fig}
 \end{figure}
 
@@ -398,12 +407,15 @@ This analysis was essential because visual inspection alone couldn’t reveal th
 
 \input{spatial_durbin_model_summary.tex}
 
+\begin{small}
+  Column ID Abbreviations:
+  
+  y: Dependent Variable, X: Predictor Variable, const: Constant Coefficient, const\_pval: Constant p-value, x\_coef: Predictor Coefficient, x\_pval: Predictor p-value, y\_lag: Dependent Variable Lag, y\_pval: p-value for Dependent Lag, x\_lag: Predictor Variable Lag, x\_pval: p-value for Predictor Lag, pR\^{}2: Pseudo R-squared, d\_imp: Direct Impact, i\_imp: Indirect Impact, t\_imp: Total Impact.
+\end{small}
+
 \input{table_index.tex}
 
 
-\begin{small}
-  y: Dependent Variable, X: Predictor Variable, const: Constant Coefficient, const\_pval: Constant p-value, x\_coef: Predictor Coefficient, x\_pval: Predictor p-value, y\_lag: Dependent Variable Lag, y\_pval: p-value for Dependent Lag, x\_lag: Predictor Variable Lag, x\_pval: p-value for Predictor Lag, pR\^{}2: Pseudo R-squared, d\_imp: Direct Impact, i\_imp: Indirect Impact, t\_imp: Total Impact.
-\end{small}
 
 % \begin{table}[ht]
 %   \centering
