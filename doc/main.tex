@@ -164,11 +164,11 @@ Here we'll be going through how the similarity metrics were defined and the rela
 \textbf{M1}: Used $Location$ feature from the excel sheets to approximate the location relative to the \textit{Melbourne General Post Office (GPO)}. The feature-value was parsed as: \newline
 \textit{Xkm Y of Melbourne} $\rightarrow (X, Y) \rightarrow (X, compass\ bearing)$, with $Y \in \{\text{N}, \text{NNE}, \text{NE}, \text{ENE}, \dots,\text{NNW}\}$ and the corresponding bearings being in $\{0, 22.5, 45, 67.5,\dots, 337.5\}$.
 
-Now, max distance of any suburb from our origin $O$ (Melbourne GPO) is 68km. So, maximum pairwise distance that can be is $2\times 68=136$ km. The curvature of the Earth causes a drop of around $1.45km$ [\href{https://earthcurvature.com/}{Calculator}] across this distance. As this is quite small, it's ignored and the entire region is treated as flat. We then convert $Polar$ to $Cartesian$ using the formula 
+Now, max distance of any suburb from our origin $O$ (Melbourne GPO) is 68km. So, maximum pairwise distance that's possible $2\times 68=136$ km. The curvature of the Earth causes a drop of around $1.45km$ [\href{https://earthcurvature.com/}{Calculator}] across this distance. As this is quite small, it's ignored and the entire region is treated as flat. We then convert $Polar$ to $Cartesian$ using the formula 
 
 $(x, y) = \big(r\sin\left(\frac{\pi\theta}{180}\right), r\cos\left(\frac{\pi\theta}{180}\right)\big)$ [$y$ axis aligns with $0^\circ$, so $\sin$ and $\cos$ are swapped]. The goal is to check for physical proximity of the suburbs, using the $L^2$ norm.
 
-\textbf{M2}: Each feature under the $Services$ catgory is considered and min-max scaled. Afterwards, mean was taken across the scaled feature-values under the Services category suburb by suburb, which is named as the $Services \ Score$ for that suburb. Similarity between suburbs from this perspective is defined as the absolute difference between the corresponding services' score. The aim is to quantify how well-equipped a suburb is in terms of the said facilities and to check for similar amount of services provided in other suburbs.
+\textbf{M2}: Each feature under the $Services$ category is considered and min-max scaled. Afterwards, mean was taken across the scaled feature-values under the Services category suburb by suburb, which is named as the $Services \ Score$ for that suburb. Similarity between suburbs from this perspective is defined as the absolute difference between the corresponding services' score. The aim is to quantify how well-equipped a suburb is in terms of the said facilities and to check for similar amount of services provided in other suburbs.
 
 \textbf{M3}: The \textit{2012 population} category was chosen and only the feature names with $\%$ were chosen, for example
 
@@ -198,7 +198,7 @@ We'll be using \href{https://en.wikipedia.org/wiki/Procrustes_analysis}{Procrust
 
 While doing MDS, for the service score metric, we're essentially dealing with scalar outputs, and trying to put them in 2D. Thus the distance has been well preserved between the original and the 2D space as indicated by the low stress and disparity as well as high correlation. This was expected.
 
-However, for JSD based population distribution similarity, the high amount of stress indicates poor projection onto the 2D. Although it's not exactly a surprise but still that's quite a high amount. Despite of that, the disparity is still low and correlation is high. 
+However, for JSD based population distribution similarity, the high amount of stress indicates poor projection onto the 2D. Although it's not exactly a surprise, still that's quite a high amount. Despite of that, the disparity is still low and correlation is high. 
 
 
 To check which suburbs remain unchanged between these two metrics \textit{M2} and \textit{M3} we do a \href{https://en.wikipedia.org/wiki/Spectral_clustering}{spectral clustering} with the exact same similarity matrices arising out of the original computation. Then we use a Gaussian Kernel with $\sigma=1$. We check for the `elbow' in the (sorted in descending order) eigenvalue plots for both M2 and M3 for the affinity matrices and decide upon the number of clusters required. We settle on $k=3$. The agreement between the two clusterings:
